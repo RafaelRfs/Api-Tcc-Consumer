@@ -9,8 +9,6 @@ import java.util.List;
 public class EmailDto {
     private String uuid;
     private String assunto;
-    private String titulo;
-    private List<String> cc;
     private List<String> emails;
     private String corpo;
 }
