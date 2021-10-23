@@ -13,7 +13,7 @@ public class EmailMapper {
         emailStatus.setDataEnvio(LocalDateTime.now());
         emailStatus.setIdRequisicao(emailDto.getUuid());
         emailStatus.setDe(emailDto.getDe());
-        emailStatus.setPara(emailStatus.getPara());
+        emailStatus.setPara(emailDto.getPara());
         emailStatus.setCorpo(emailDto.getCorpo());
         return emailStatus;
     }

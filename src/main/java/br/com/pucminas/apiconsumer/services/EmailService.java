@@ -1,6 +1,7 @@
 package br.com.pucminas.apiconsumer.services;
 
 import br.com.pucminas.apiconsumer.dtos.EmailDto;
+import br.com.pucminas.apiconsumer.entities.EmailStatus;
 import br.com.pucminas.apiconsumer.enums.StatusEmail;
 import br.com.pucminas.apiconsumer.mappers.EmailMapper;
 import br.com.pucminas.apiconsumer.repositories.EmailRepository;
@@ -58,19 +59,27 @@ public class EmailService {
     }
 
     @Transactional(rollbackFor = RuntimeException.class)
-    public void saveEmailDb(EmailDto emailDto) {
-        emailRepository.save(
+    public EmailStatus saveEmailDb(EmailDto emailDto) {
+        return emailRepository.save(
                 EmailMapper.mapToEmailStatus(emailDto)
+        );
+    }
+
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void saveEmailDb(EmailStatus emailStatus) {
+         emailRepository.save(
+                emailStatus
         );
     }
 
 
     private void sendEmail(EmailDto emailDto, String emailTo) {
         log.info("Enviando email para: {}", emailTo);
+        EmailStatus emailStatus =  null;
         try {
             emailDto.setPara(emailTo);
             emailDto.setStatus(StatusEmail.PROCESSANDO);
-            saveEmailDb(emailDto);
+            emailStatus = saveEmailDb(emailDto);
             SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom(emailDto.getDe());
             message.setTo(emailTo);
@@ -78,11 +87,14 @@ public class EmailService {
             message.setText(emailDto.getCorpo());
             emailSender.send(message);
             emailDto.setStatus(StatusEmail.ENVIADO);
-            saveEmailDb(emailDto);
+            emailStatus.setStatus(emailDto.getStatus());
+            saveEmailDb(emailStatus);
             log.info("Email enviado com sucesso para: {}", emailTo);
         } catch (Exception e) {
             emailDto.setStatus(StatusEmail.ERRO);
-            saveEmailDb(emailDto);
+            emailStatus.setStatus(emailDto.getStatus());
+            saveEmailDb(emailStatus);
+
             log.error("Erro ao enviar o email {} para o UUID {} : {}",
                     emailTo,
                     emailDto.getUuid(),
