@@ -13,9 +13,9 @@ public class EmailStatus implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.)
     @Column(name = "id")
-    private UUID id;
+    private Long  id;
 
     @Column(name = "from")
     private String de;
