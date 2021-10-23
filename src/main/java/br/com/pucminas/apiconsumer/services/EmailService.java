@@ -27,14 +27,14 @@ public class EmailService {
     }
 
     private void sendEmail(EmailDto emailDto, String emailTo) {
-        log.info("Enviando email para: {}", emailDto);
+        log.info("Enviando email para: {}", emailTo);
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(emailFrom);
         message.setTo(emailTo);
         message.setSubject(emailDto.getAssunto());
         message.setText(emailDto.getCorpo());
         emailSender.send(message);
-        log.info("Email enviado com sucesso para: {}", emailDto);
+        log.info("Email enviado com sucesso para: {}", emailTo);
     }
 
 
