@@ -4,7 +4,6 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -13,14 +12,13 @@ public class EmailStatus implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id")
-    private Long  id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
-    @Column(name = "from")
+    @Column(name = "from_email")
     private String de;
 
-    @Column(name = "to")
+    @Column(name = "to_email")
     private String para;
 
     @Column(name = "subject")
