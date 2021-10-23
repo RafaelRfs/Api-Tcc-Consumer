@@ -13,7 +13,7 @@ public class EmailStatus implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy= GenerationType.)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "id")
     private Long  id;
 
