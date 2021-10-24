@@ -34,10 +34,13 @@ public class EmailDatabaseService {
         }
     }
 
-    @Transactional
+    public List<EmailStatus> findEmailsbyStatusDb(StatusEmail status){
+        return emailRepository.findByStatus(status);
+    }
+
     public List<EmailDto> findEmailsByStatus(StatusEmail status) {
         try {
-            return emailRepository.findByStatus(status)
+            return findEmailsbyStatusDb(status)
                     .stream()
                     .map(email -> EmailMapper.mapToEmailDto(email))
                     .collect(Collectors.toList());
@@ -59,6 +62,5 @@ public class EmailDatabaseService {
                 emailStatus
         );
     }
-
 
 }
