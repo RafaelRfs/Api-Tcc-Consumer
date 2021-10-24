@@ -23,7 +23,6 @@ public class DatabaseConfig {
         String driver = "postgres".equalsIgnoreCase(dbUri.getScheme())
                 ? "postgresql" : dbUri.getScheme().trim().toLowerCase();
         String options = "?useUnicode=true&characterEncoding=utf-8&useTimezone=true&serverTimezone=UTC";
-
         return DataSourceBuilder.create()
                 .url(obterEndpoint(dbUri, driver, options))
                 .username(user)

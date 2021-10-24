@@ -2,7 +2,7 @@ package br.com.pucminas.apiconsumer.controllers;
 
 import br.com.pucminas.apiconsumer.dtos.EmailDto;
 import br.com.pucminas.apiconsumer.enums.StatusEmail;
-import br.com.pucminas.apiconsumer.services.EmailService;
+import br.com.pucminas.apiconsumer.services.EmailDatabaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AppController {
 
-    private final EmailService emailService;
+    private final EmailDatabaseService emailDatabaseService;
 
     @GetMapping("/{uuid}")
     public ResponseEntity<List<EmailDto>> findEmailsById(@PathVariable String uuid){
         return new ResponseEntity<>(
-                emailService.findEmailsByIdRequest(uuid),
+                emailDatabaseService.findEmailsByIdRequest(uuid),
                 HttpStatus.OK
         );
     }
@@ -28,7 +28,7 @@ public class AppController {
     @GetMapping("/status/{status}")
     public ResponseEntity<List<EmailDto>> findEmailsByStatus(@PathVariable StatusEmail status){
         return new ResponseEntity<>(
-                emailService.findEmailsByStatus(status),
+                emailDatabaseService.findEmailsByStatus(status),
                 HttpStatus.OK
         );
     }
