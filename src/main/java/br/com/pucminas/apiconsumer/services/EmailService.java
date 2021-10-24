@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Slf4j
@@ -29,9 +28,8 @@ public class EmailService {
         log.info("Termino do envio dos emails para o payload do ID: {}", emailDto.getUuid());
     }
 
-
     public void reSendEmailAsync(List<EmailStatus> emails){
-       emails.forEach(this::sendEmail);
+        emails.forEach(this::sendEmail);
     }
 
     private MimeMessagePreparator prepareEmail(EmailDto emailDto) {
