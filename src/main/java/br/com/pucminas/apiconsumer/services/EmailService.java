@@ -39,7 +39,7 @@ public class EmailService {
             messageHelper.setTo(emailDto.getPara());
             messageHelper.setSubject(emailDto.getAssunto());
             messageHelper.setText(
-                    mailContentBuilderService.build(emailDto.getCorpo()),
+                    mailContentBuilderService.build(emailDto.getCorpo(),emailDto.getProjeto()),
                     true
             );
         };

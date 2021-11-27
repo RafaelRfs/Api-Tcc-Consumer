@@ -11,9 +11,10 @@ public class MailContentBuilderService {
 
     private final TemplateEngine templateEngine;
 
-    public String build(String message) {
+    public String build(String message, Long projeto) {
         Context context = new Context();
         context.setVariable("message", message);
+        context.setVariable("projeto", projeto);
         return templateEngine.process("mailTemplate", context);
     }
 
