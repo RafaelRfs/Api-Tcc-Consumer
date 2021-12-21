@@ -26,7 +26,7 @@ Para buildar o projeto faça:
 
 ## Rodando o projeto
 - Acesse a pasta pasta target e rode o jar pelo seguinte comando:
-### `docker run -e AMQP_URL=[substituir pelo valor da variavel AMQP] -e DATABASE_URL=[substituir pelo valor da variavel DATABASE_ULR] -e KEYSTORE_ALIAS=api_tcc_producer -e KEYSTORE_PASS=[pedir a senha por email]  api-consumer-tcc:1.0.0 `
+### `docker run -e AMQP_URL=[substituir pelo valor da variavel AMQP] -e DATABASE_URL=[substituir pelo valor da variavel DATABASE_URL] -e KEYSTORE_ALIAS=api_tcc_producer -e KEYSTORE_PASS=[pedir a senha por email]  api-consumer-tcc:1.0.0 `
 
 
 ## Projeto criado por :
