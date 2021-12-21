@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  tcc-postgres-compose:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "abc123"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postresql-data:/var/lib/postgresql/data 
+    networks:
+      - postgres-compose-network
+      
+  tcc-pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "testerabc@test.com"
+      PGADMIN_DEFAULT_PASSWORD: "abc123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - tcc-postgres-compose
+    networks:
+      - postgres-compose-network
+
+networks: 
+  postgres-compose-network:
+    driver: bridge
